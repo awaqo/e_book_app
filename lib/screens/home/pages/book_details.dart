@@ -57,6 +57,107 @@ class BookDetail extends StatelessWidget {
       );
     }
 
+    Widget infoDescription() {
+      return Container(
+        // height: 60,
+        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 13),
+        margin: EdgeInsets.only(top: 20),
+        decoration: BoxDecoration(
+          color: slate100Color,
+          borderRadius: BorderRadius.circular(9),
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    'Rating',
+                    style: medium12.copyWith(color: slate500Color),
+                  ),
+                  Text(
+                    '4.8',
+                    style: semiBold14.copyWith(color: slate600Color),
+                  ),
+                ],
+              ),
+              VerticalDivider(
+                color: slate600Color,
+                thickness: 1,
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Number of Pages',
+                    style: medium12.copyWith(color: slate500Color),
+                  ),
+                  Text(
+                    '180 Pages',
+                    style: semiBold14.copyWith(color: slate600Color),
+                  ),
+                ],
+              ),
+              VerticalDivider(
+                color: slate400Color,
+                thickness: 1,
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Language',
+                    style: medium12.copyWith(color: slate500Color),
+                  ),
+                  Text(
+                    'ENG',
+                    style: semiBold14.copyWith(color: slate600Color),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    Widget saveButton() {
+      return Positioned(
+        top: 410,
+        right: 20,
+        child: Container(
+          height: 50,
+          width: 50,
+          padding: EdgeInsets.symmetric(vertical: 16),
+          decoration: BoxDecoration(
+            color: greenColor,
+            shape: BoxShape.circle,
+          ),
+          child: Image.asset('assets/icons/icon-save.png'),
+        ),
+      );
+    }
+
+    Widget buttonReadNow() {
+      return Container(
+        height: 50,
+        width: double.infinity,
+        margin: EdgeInsets.only(top: 30),
+        child: TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            backgroundColor: greenColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          child: Text(
+            'Read Now',
+            style: semiBold20.copyWith(color: whiteColor),
+          ),
+        ),
+      );
+    }
+
     Widget description() {
       return Container(
         margin: EdgeInsets.only(top: 40),
@@ -100,9 +201,11 @@ class BookDetail extends StatelessWidget {
             ),
             SizedBox(height: 6),
             Text(
-                'Enchantment, as defined by bestselling business guru Guy Kawasaki, is not about manipulating people. It transforms situations and relationships.',
-                style: regular12.copyWith(color: slate500Color),
-                ),
+              'Enchantment, as defined by bestselling business guru Guy Kawasaki, is not about manipulating people. It transforms situations and relationships.',
+              style: regular12.copyWith(color: slate500Color),
+            ),
+            infoDescription(),
+            buttonReadNow(),
           ],
         ),
       );
@@ -112,11 +215,16 @@ class BookDetail extends StatelessWidget {
       backgroundColor: slate200Color,
       body: ListView(
         children: [
-          Column(
+          Stack(
             children: [
-              header(),
-              bookImage(),
-              description(),
+              Column(
+                children: [
+                  header(),
+                  bookImage(),
+                  description(),
+                ],
+              ),
+              saveButton(),
             ],
           ),
         ],
