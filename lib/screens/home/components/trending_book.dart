@@ -13,35 +13,50 @@ class TrendingBook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        InkWell(
-          onTap: () {
-            Navigator.pushNamed(context, BookDetail.nameRoute);
-          },
-          child: Container(
-            margin: EdgeInsets.only(top: 12, right: 20),
-            height: 160,
-            width: 110,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              image: DecorationImage(
-                image: AssetImage(info.imageUrl),
+    return Container(
+      width: 120,
+      margin: EdgeInsets.only(top: 12, right: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, BookDetail.nameRoute, arguments: {
+                'imageUrl': info.imageUrl,
+                'writers': info.writers,
+                'titleBook': info.titleBook,
+                'rating' : info.rating,
+                'numPages' : info.numPages,
+                'descBook' : info.descBook,
+              });
+            },
+            child: Hero(
+              tag: info.imageUrl,
+              child: Container(
+                height: 160,
+                width: 110,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  image: DecorationImage(
+                    image: AssetImage(info.imageUrl),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-        SizedBox(height: 8),
-        Text(
-          info.writers,
-          style: medium12.copyWith(color: slate400Color),
-        ),
-        Text(
-          info.titleBook,
-          style: semiBold14.copyWith(color: slate700Color),
-        ),
-      ],
+          SizedBox(height: 8),
+          Text(
+            info.writers,
+            style: medium12.copyWith(color: slate400Color),
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            info.titleBook,
+            style: semiBold14.copyWith(color: slate700Color),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
     );
   }
 }

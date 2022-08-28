@@ -7,6 +7,8 @@ class BookDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map data = ModalRoute.of(context)?.settings.arguments as Map;
+
     Widget header() {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -43,15 +45,18 @@ class BookDetail extends StatelessWidget {
     }
 
     Widget bookImage() {
-      return Container(
-        margin: EdgeInsets.only(top: 40),
-        height: 270,
-        width: 175,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage('assets/images/trendingnow_1.png'),
+      return Hero(
+        tag: data['imageUrl'],
+        child: Container(
+          margin: EdgeInsets.only(top: 40),
+          height: 270,
+          width: 175,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage(data['imageUrl']),
+            ),
           ),
         ),
       );
@@ -59,7 +64,6 @@ class BookDetail extends StatelessWidget {
 
     Widget infoDescription() {
       return Container(
-        // height: 60,
         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 13),
         margin: EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
@@ -77,7 +81,7 @@ class BookDetail extends StatelessWidget {
                     style: medium12.copyWith(color: slate500Color),
                   ),
                   Text(
-                    '4.8',
+                    data['rating'],
                     style: semiBold14.copyWith(color: slate600Color),
                   ),
                 ],
@@ -93,7 +97,7 @@ class BookDetail extends StatelessWidget {
                     style: medium12.copyWith(color: slate500Color),
                   ),
                   Text(
-                    '180 Pages',
+                    data['numPages'],
                     style: semiBold14.copyWith(color: slate600Color),
                   ),
                 ],
@@ -176,12 +180,12 @@ class BookDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Enchantment',
+                        data['titleBook'],
                         style: semiBold20.copyWith(color: slate700Color),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        'Guy Kawasaki',
+                        data['writers'],
                         style: medium14.copyWith(color: slate400Color),
                       ),
                     ],
@@ -201,7 +205,7 @@ class BookDetail extends StatelessWidget {
             ),
             SizedBox(height: 6),
             Text(
-              'Enchantment, as defined by bestselling business guru Guy Kawasaki, is not about manipulating people. It transforms situations and relationships.',
+              data['descBook'],
               style: regular12.copyWith(color: slate500Color),
             ),
             infoDescription(),
